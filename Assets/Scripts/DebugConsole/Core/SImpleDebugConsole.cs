@@ -39,7 +39,12 @@ namespace DebugConsole.Core
 
         public void AddCommand(ICommand<T> command)
         {
-            throw new NotImplementedException();
+            if (Commands.Contains(command))
+                throw new DuplicateNameException($"Command {command.Name} already registered");
+
+            Commands.Add(command);
+            
+            AddToCommandDictionary(command);
         }
 
         public bool IsValidCommand(T name)
@@ -55,13 +60,11 @@ namespace DebugConsole.Core
 
         private void AddToCommandDictionary(ICommand<T> command)
         {
-            // Nombre principal
             if (!_commandDictionary.ContainsKey(command.Name))
                 _commandDictionary.Add(command.Name, command);
             else
                 throw new DuplicateNameException($"Command {command.Name} already exists in dictionary");
 
-            // Aliases
             foreach (var alias in command.Aliases)
             {
                 if (_commandDictionary.TryGetValue(alias, out var dup))

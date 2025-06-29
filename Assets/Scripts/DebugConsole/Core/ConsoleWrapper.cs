@@ -59,10 +59,7 @@ namespace DebugConsole.Core
 
         public void ExecuteCommand(string name, params string[] args)
             => DebugConsole.ExecuteCommand(name, args);
-
-        /// <summary>
-        /// Parsea la línea de texto, valida el comando y lo ejecuta.
-        /// </summary>
+        
         public bool TryUseInput(string input)
         {
             var parts      = input.Split(separators, StringSplitOptions.RemoveEmptyEntries);
