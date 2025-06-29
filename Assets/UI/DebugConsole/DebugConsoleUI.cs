@@ -8,11 +8,23 @@ namespace UI.DebugConsole
     public class DebugConsoleUI : MonoBehaviour
     {
         private const int CHARACTER_LIMIT = 13000;
-
+        
+        [Header("UI References")]
+        [SerializeField] private GameObject panel;
+        [SerializeField] private Button openCloseButton;
         [SerializeField] private TMP_Text consoleBody;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private Button submit;
-        [SerializeField] private ConsoleWrapper consoleWrapper;
+        [SerializeField] private ConsoleWrapper consoleWrapper; 
+        
+        private void Awake()
+        {
+            if (panel != null) panel.SetActive(false);
+
+            if (openCloseButton != null)
+                openCloseButton.onClick.AddListener(() =>
+                    panel.SetActive(!panel.activeSelf));
+        }
 
         private void OnEnable()
         {
@@ -28,6 +40,13 @@ namespace UI.DebugConsole
             inputField?.onSubmit.RemoveListener(SubmitInput);
             if (consoleWrapper != null)
                 consoleWrapper.Log -= WriteToOutput;
+        }
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                panel.SetActive(!panel.activeSelf);
+            }
         }
 
         private void HandleSubmitClick() => SubmitInput(inputField.text);
