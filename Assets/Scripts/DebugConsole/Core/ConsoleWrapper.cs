@@ -13,8 +13,7 @@ namespace DebugConsole.Core
     {
         [SerializeField] protected List<CommandSO> commands;
         [SerializeField] protected char[] separators = new[] { ' ', '\t' };
-        [SerializeField] private AnimationClip[] animationClips;
-
+        [SerializeField] private AnimationCommandConfig[] animationConfigs;
 
         protected IDebugConsole<string> DebugConsole;
         public Action<string> Log = delegate { };
@@ -30,7 +29,8 @@ namespace DebugConsole.Core
 
             DebugConsole.AddCommand(new AliasesCommand(DebugConsole));
             DebugConsole.AddCommand(new HelpCommand(DebugConsole));
-            DebugConsole.AddCommand(new PlayAnimationCommand(animationClips));
+            DebugConsole.AddCommand(new PlayAnimationCommand(animationConfigs));
+
 
 
             _originalLogHandler = Debug.unityLogger.logHandler;

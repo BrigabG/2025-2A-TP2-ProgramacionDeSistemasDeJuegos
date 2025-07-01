@@ -4,40 +4,47 @@ using System.Collections.Generic;
 using System.Linq;
 using DebugConsole.Interfaces;
 
+
 namespace DebugConsole.Commands
 {
     public class PlayAnimationCommand: ICommand<string>
     {
-        private readonly Dictionary<string, AnimationClip> _clipsByName;
+        private readonly Dictionary<string, AnimationCommandConfig> _animationConfigs;
 
-        public PlayAnimationCommand(AnimationClip[] clips)
+        public PlayAnimationCommand(AnimationCommandConfig[] animationConfigs)
         {
-            _clipsByName = clips.ToDictionary(c => c.name, c => c);
+            _animationConfigs = animationConfigs.ToDictionary(c => c.animatorStateName, c => c);
         }
 
         public string Name => "playanimation";
-        public List<string> Aliases => new List<string>{ "pa", "playanim" };
-        public string Description => "Plays an animation on all animators: playanimation <clipName>";
+        public List<string> Aliases => new List<string> { "pa", "playanim" };
+        public string Description => "Plays an animation on all character animators: playanimation <stateName> [duration]";
 
         public void Execute(Action<string> log, params string[] args)
         {
             if (args.Length == 0)
             {
-                log("Usage: playanimation <clipName>");
+                log("Usage: playanimation <stateName> [duration]");
                 return;
             }
 
-            var clipName = args[0];
-            if (!_clipsByName.TryGetValue(clipName, out var clip))
+            var stateName = args[0];
+            var duration = args.Length > 1 && float.TryParse(args[1], out var d) ? d : 1f;
+
+            if (!_animationConfigs.TryGetValue(stateName, out var animConfig))
             {
-                log($"Animation not found: {clipName}");
+                log($"Animation state not found: {stateName}");
                 return;
             }
 
-            var animators = GameObject.FindObjectsByType<Animator>(FindObjectsSortMode.None);            foreach (var animator in animators)
-                animator.Play(clip.name);
+            var characterAnimators = GameObject.FindObjectsByType<CharacterAnimator>(FindObjectsSortMode.None);
 
-            log($"Played '{clipName}' on {animators.Length} Animator(s).");
+            foreach (var charAnimator in characterAnimators)
+            {
+                charAnimator.ForceAnimation(animConfig, duration);
+            }
+
+            log($"Forced '{stateName}' on {characterAnimators.Length} CharacterAnimator(s) for {duration}s.");
         }
     }
 }
