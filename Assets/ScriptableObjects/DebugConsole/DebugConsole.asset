@@ -13,6 +13,11 @@ MonoBehaviour:
   m_Name: DebugConsole
   m_EditorClassIdentifier: 
   commands: []
-  separators: 20000900
-  animationClips: []
-  animationConfigs: []
+  separators: 2000
+  animationConfigs:
+  - {fileID: 11400000, guid: d14e0eca79704e2478ff1fa91086cacf, type: 2}
+  - {fileID: 11400000, guid: 1fbcef123531f7f41bcbec7b7cf29e58, type: 2}
+  - {fileID: 11400000, guid: 8c2e2291f1c8857458332a4cb3877816, type: 2}
+  - {fileID: 11400000, guid: b51000328f847ad4aa9411c30dbfe8c8, type: 2}
+  - {fileID: 11400000, guid: 365d1af7205903f4b96b03699e18b5b5, type: 2}
+  - {fileID: 11400000, guid: 1dd59b3eedcfe0b4b82347f4c5191774, type: 2}

@@ -30,7 +30,7 @@ namespace DebugConsole.Core
             DebugConsole.AddCommand(new AliasesCommand(DebugConsole));
             DebugConsole.AddCommand(new HelpCommand(DebugConsole));
             DebugConsole.AddCommand(new PlayAnimationCommand(animationConfigs));
-
+            
 
 
             _originalLogHandler = Debug.unityLogger.logHandler;

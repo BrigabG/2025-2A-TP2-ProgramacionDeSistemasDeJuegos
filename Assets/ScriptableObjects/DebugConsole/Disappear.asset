@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ca532f3e74050428fcf6f688c14d79, type: 3}
   m_Name: Disappear
   m_EditorClassIdentifier: 
-  animatorStateName: 
+  animatorStateName: Disappear
   parameters: []
-  exitParameters: []
+  exitParameters:
+  - type: 4
+    name: 
+    boolValue: 0
+    floatValue: 0

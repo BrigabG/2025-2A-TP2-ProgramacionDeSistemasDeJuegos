@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ca532f3e74050428fcf6f688c14d79, type: 3}
   m_Name: Run
   m_EditorClassIdentifier: 
-  animatorStateName: 
-  parameters: []
-  exitParameters: []
+  animatorStateName: Run
+  parameters:
+  - type: 1
+    name: Speed
+    boolValue: 0
+    floatValue: 1
+  exitParameters:
+  - type: 1
+    name: Speed
+    boolValue: 0
+    floatValue: 0

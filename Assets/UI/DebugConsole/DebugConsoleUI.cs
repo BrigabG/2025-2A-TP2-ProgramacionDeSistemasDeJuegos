@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DebugConsole.Core;
+using UnityEngine.InputSystem;
 
 namespace UI.DebugConsole
 {
@@ -11,23 +12,38 @@ namespace UI.DebugConsole
         
         [Header("UI References")]
         [SerializeField] private GameObject panel;
-        [SerializeField] private Button openCloseButton;
         [SerializeField] private TMP_Text consoleBody;
         [SerializeField] private TMP_InputField inputField;
+        [SerializeField] private Button openCloseButton;
         [SerializeField] private Button submit;
         [SerializeField] private ConsoleWrapper consoleWrapper; 
-        
+        private InputSystem_Actions inputActions;
+
         private void Awake()
         {
-            if (panel != null) panel.SetActive(false);
+            inputActions = new InputSystem_Actions();
 
+            inputActions.DebugConsole.ToggleConsole.performed += _ =>
+            {
+                panel.SetActive(!panel.activeSelf);
+                if (panel.activeSelf) inputField.ActivateInputField();
+            };
+            
+            inputActions.DebugConsole.SubmitConsole.performed += _ =>
+            {
+                HandleSubmitClick();
+            };
+            
             if (openCloseButton != null)
-                openCloseButton.onClick.AddListener(() =>
-                    panel.SetActive(!panel.activeSelf));
+                openCloseButton.onClick.AddListener(ToggleConsole);
+            
+            if (panel != null) panel.SetActive(false);
         }
 
         private void OnEnable()
         {
+            inputActions.Enable();
+            
             submit?.onClick.AddListener(HandleSubmitClick);
             inputField?.onSubmit.AddListener(SubmitInput);
             if (consoleWrapper != null)
@@ -36,26 +52,18 @@ namespace UI.DebugConsole
 
         private void OnDisable()
         {
+            inputActions.Disable();
+
             submit?.onClick.RemoveListener(HandleSubmitClick);
             inputField?.onSubmit.RemoveListener(SubmitInput);
             if (consoleWrapper != null)
                 consoleWrapper.Log -= WriteToOutput;
         }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                panel.SetActive(!panel.activeSelf);
-            }
-        }
-
         private void HandleSubmitClick() => SubmitInput(inputField.text);
 
         private void SubmitInput(string input)
         {
-            if (string.IsNullOrEmpty(input))
-                return;
-
+            if (string.IsNullOrEmpty(input)) return;
             if (consoleWrapper == null)
             {
                 Debug.LogError($"{nameof(consoleWrapper)} is null!");
@@ -64,6 +72,12 @@ namespace UI.DebugConsole
 
             consoleWrapper.TryUseInput(input);
             inputField.SetTextWithoutNotify(string.Empty);
+        }
+        public void ToggleConsole()
+        {
+            panel.SetActive(!panel.activeSelf);
+            if (panel.activeSelf)
+                inputField.ActivateInputField();
         }
 
         private void WriteToOutput(string newFeedback)

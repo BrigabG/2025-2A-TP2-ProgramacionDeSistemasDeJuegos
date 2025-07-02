@@ -231,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 3659010567693264050}
   animator: {fileID: 6413871392692510266}
-  spriteRenderer: {fileID: 434910250161865871}
+  spriteRenderer: {fileID: 5829402183620181219}
   speedParameter: Speed
   isJumpingParameter: IsJumping
   isFallingParameter: IsFalling
