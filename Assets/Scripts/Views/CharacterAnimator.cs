@@ -31,7 +31,7 @@ public class CharacterAnimator : Registry<CharacterAnimator>
             spriteRenderer = GetComponentInParent<SpriteRenderer>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         base.OnEnable();
         if (!character || !animator || !spriteRenderer)
@@ -52,7 +52,7 @@ public class CharacterAnimator : Registry<CharacterAnimator>
         spriteRenderer.flipX = speed.x < 0;
     }
     
-    private void OnDisable()
+    protected override void OnDisable()
     {
         base.OnDisable(); 
     }
