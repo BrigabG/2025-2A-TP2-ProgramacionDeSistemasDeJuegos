@@ -11,10 +11,13 @@ namespace DebugConsole.Commands
     {
         private readonly Dictionary<string, AnimationCommandConfig> _animationConfigs;
 
+
         public PlayAnimationCommand(AnimationCommandConfig[] animationConfigs)
         {
-            _animationConfigs = animationConfigs.ToDictionary(c => c.animatorStateName, c => c);
+            _animationConfigs = animationConfigs
+                .ToDictionary(c => c.animatorStateName, c => c);
         }
+        
 
         public string Name => "playanimation";
         public List<string> Aliases => new List<string> { "pa", "playanim" };
@@ -37,14 +40,12 @@ namespace DebugConsole.Commands
                 return;
             }
 
-            var characterAnimators = GameObject.FindObjectsByType<CharacterAnimator>(FindObjectsSortMode.None);
-
-            foreach (var charAnimator in characterAnimators)
-            {
+            var animators = CharacterAnimator.Instances;
+            foreach (var charAnimator in animators)
                 charAnimator.ForceAnimation(animConfig, duration);
-            }
 
-            log($"Forced '{stateName}' on {characterAnimators.Length} CharacterAnimator(s) for {duration}s.");
+
+            log($"Forced '{stateName}' on {animators.Count} CharacterAnimator(s) for {duration}s.");
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DebugConsole.Commands;
 using UnityEngine;
 
-public class CharacterAnimator : MonoBehaviour
+public class CharacterAnimator : Registry<CharacterAnimator>
 {
     [SerializeField] private Character character;
     [SerializeField] private Animator animator;
@@ -33,6 +33,7 @@ public class CharacterAnimator : MonoBehaviour
 
     private void OnEnable()
     {
+        base.OnEnable();
         if (!character || !animator || !spriteRenderer)
         {
             Debug.LogError($"{name} <color=grey>({GetType().Name})</color>: At least one reference is null!");
@@ -49,6 +50,11 @@ public class CharacterAnimator : MonoBehaviour
         animator.SetBool(isJumpingParameter, character.Velocity.y > 0);
         animator.SetBool(isFallingParameter, character.Velocity.y < 0);
         spriteRenderer.flipX = speed.x < 0;
+    }
+    
+    private void OnDisable()
+    {
+        base.OnDisable(); 
     }
     
     public void ForceAnimation(AnimationCommandConfig animConfig, float duration = 1f)

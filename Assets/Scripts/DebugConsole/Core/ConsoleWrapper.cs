@@ -15,9 +15,9 @@ namespace DebugConsole.Core
         [SerializeField] protected char[] separators = new[] { ' ', '\t' };
         [SerializeField] private AnimationCommandConfig[] animationConfigs;
 
+
         protected IDebugConsole<string> DebugConsole;
         public Action<string> Log = delegate { };
-
         private ILogHandler _originalLogHandler;
 
         protected void OnEnable()
@@ -31,8 +31,6 @@ namespace DebugConsole.Core
             DebugConsole.AddCommand(new HelpCommand(DebugConsole));
             DebugConsole.AddCommand(new PlayAnimationCommand(animationConfigs));
             
-
-
             _originalLogHandler = Debug.unityLogger.logHandler;
             Debug.unityLogger.logHandler = this;
         }
