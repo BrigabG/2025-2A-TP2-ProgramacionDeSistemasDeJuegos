@@ -20,6 +20,11 @@ namespace DebugConsole.Commands
 
         public string Description => "Shows all aliases for a command";
 
+        public string DetailedHelp =>
+            "aliases <commandName>\n" +
+            "    Shows all aliases for the specified command.\n" +
+            "    Example: aliases help";
+
         public void Execute(Action<string> log, params string[] args)
         {
             if (args.Length == 0)

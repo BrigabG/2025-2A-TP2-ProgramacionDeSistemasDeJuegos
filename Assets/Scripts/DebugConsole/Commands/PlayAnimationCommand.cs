@@ -23,6 +23,11 @@ namespace DebugConsole.Commands
         public List<string> Aliases => new List<string> { "pa", "playanim" };
         public string Description => "Plays an animation on all character animators: playanimation <stateName> [duration]";
 
+        public string DetailedHelp =>
+            "playanimation <stateName> [duration]\n" +
+            "    Plays animation on all characters. Duration defaults to 1.0s.\n" +
+            "    Examples: playanimation jump | playanimation idle 2.5";
+
         public void Execute(Action<string> log, params string[] args)
         {
             if (args.Length == 0)

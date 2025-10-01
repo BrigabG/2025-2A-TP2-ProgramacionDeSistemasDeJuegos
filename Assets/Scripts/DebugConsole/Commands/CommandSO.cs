@@ -10,7 +10,7 @@ namespace DebugConsole.Commands
         public abstract string Name { get; }
         public abstract List<string> Aliases { get; }
         public abstract string Description { get; }
+        public abstract string DetailedHelp { get; }
         public abstract void Execute(Action<string> writeToConsole, params string[] args);
     }
 }
-

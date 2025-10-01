@@ -8,6 +8,7 @@ namespace DebugConsole.Interfaces
         T Name { get; }
         List<T> Aliases { get; }
         T Description { get; }
+        T DetailedHelp { get; }
         void Execute(Action<T> log, params T[] args);
     }
 }
