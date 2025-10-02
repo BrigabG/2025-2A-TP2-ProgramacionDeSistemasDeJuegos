@@ -11,7 +11,6 @@ namespace DebugConsole.Core
     [CreateAssetMenu(menuName = "Debug/ConsoleWrapper")]
     public class ConsoleWrapper : ScriptableObject, IDebugConsole<string>, ILogHandler
     {
-        [SerializeField] protected List<CommandSO> commands;
         [SerializeField] protected char[] separators = new[] { ' ', '\t' };
         [SerializeField] private AnimationCommandConfig[] animationConfigs;
 
@@ -22,10 +21,7 @@ namespace DebugConsole.Core
 
         protected void OnEnable()
         {
-            DebugConsole = new SimpleDebugConsole<string>(
-              str => Log(str),
-              commands.Cast<ICommand<string>>().ToArray()
-            );
+            DebugConsole = new SimpleDebugConsole<string>(str => Log(str));
 
             DebugConsole.AddCommand(new AliasesCommand(DebugConsole));
             DebugConsole.AddCommand(new HelpCommand(DebugConsole));
