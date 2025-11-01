@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class SpawnButton : MonoBehaviour
 {
     [SerializeField] private Button button;
+    [SerializeField] private CharacterConfig characterConfig;
 
     private void Reset()
         => button = GetComponent<Button>();
@@ -33,7 +34,11 @@ public class SpawnButton : MonoBehaviour
 
     private void HandleClick()
     {
-        var spawner = FindFirstObjectByType<CharacterSpawner>();
-        spawner.Spawn();
+        if (!ServiceLocator.TryGet<IGameServices>(out var services))
+            return;
+        var spawner = services.CharacterSpawner;
+        if (spawner == null || characterConfig == null)
+            return;
+        spawner.Spawn(characterConfig);
     }
 }

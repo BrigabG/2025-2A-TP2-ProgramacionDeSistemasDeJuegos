@@ -1,4 +1,4 @@
 public interface ICharacterSpawner
 {
-    void Spawn();
+    void Spawn(CharacterConfig config);
 }

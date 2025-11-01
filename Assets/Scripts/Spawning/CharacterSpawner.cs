@@ -3,10 +3,6 @@ using UnityEngine;
 public class CharacterSpawner : MonoBehaviour, ICharacterSpawner, ISetup<CharacterSpawnerModel>
 {
     [SerializeField] CharacterSpawnerModel startupModel;
-    [SerializeField] Character prefab;
-    [SerializeField] CharacterModel characterModel;
-    [SerializeField] PlayerControllerModel controllerModel;
-    [SerializeField] RuntimeAnimatorController animatorController;
 
     CharacterSpawnerModel model;
     int sequentialIndex;
@@ -48,14 +44,14 @@ public class CharacterSpawner : MonoBehaviour, ICharacterSpawner, ISetup<Charact
         sequentialIndex = 0;
     }
 
-    public void Spawn()
+    public void Spawn(CharacterConfig config)
     {
-        if (isInactive || !prefab)
+        if (isInactive || config == null)
             return;
 
         var pose = DeterminePose();
-        var instance = Instantiate(prefab, pose.position, pose.rotation);
-        ConfigureCharacter(instance);
+        var factory = ServiceLocator.Get<ICharacterAbstractFactory>();
+        factory.Create(config, pose);
     }
 
     Pose DeterminePose()
@@ -90,36 +86,4 @@ public class CharacterSpawner : MonoBehaviour, ICharacterSpawner, ISetup<Charact
         return point;
     }
 
-    void ConfigureCharacter(Character instance)
-    {
-        if (characterModel != null)
-        {
-            if (instance.TryGetComponent(out ISetup<CharacterModel> setup))
-                setup.Setup(characterModel);
-            else
-            {
-                var character = instance.gameObject.AddComponent<Character>();
-                character.Setup(characterModel);
-            }
-        }
-
-        if (controllerModel != null)
-        {
-            if (instance.TryGetComponent(out ISetup<IPlayerControllerModel> controllerSetup))
-                controllerSetup.Setup(controllerModel);
-            else
-            {
-                var controller = instance.gameObject.AddComponent<PlayerController>();
-                controller.Setup(controllerModel);
-            }
-        }
-
-        if (animatorController)
-        {
-            var animator = instance.GetComponentInChildren<Animator>();
-            if (!animator)
-                animator = instance.gameObject.AddComponent<Animator>();
-            animator.runtimeAnimatorController = animatorController;
-        }
-    }
 }
