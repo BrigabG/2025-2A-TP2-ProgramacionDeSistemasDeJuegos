@@ -1,44 +1,57 @@
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawnButton : MonoBehaviour
+public class SpawnButton : MonoBehaviour, ISetup<SpawnButtonConfig>
 {
-    [SerializeField] private Button button;
-    [SerializeField] private CharacterConfig characterConfig;
+    [SerializeField] Button button;
+    [SerializeField] TMP_Text label;
+    [SerializeField] Text legacyLabel;
 
-    private void Reset()
-        => button = GetComponent<Button>();
+    SpawnButtonConfig config;
 
-    private void Awake()
-    {
-        if (!button)
-            button = GetComponent<Button>();
-    }
-
-    private void OnEnable()
+    void OnEnable()
     {
         if (!button)
         {
-            Debug.LogError($"{name} <color=grey>({GetType().Name})</color>: {nameof(button)} is null!");
             enabled = false;
             return;
         }
         button.onClick.AddListener(HandleClick);
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
-        button?.onClick?.RemoveListener(HandleClick);
+        if (button)
+            button.onClick.RemoveListener(HandleClick);
     }
 
-    private void HandleClick()
+    public void Setup(SpawnButtonConfig value)
     {
-        if (!ServiceLocator.TryGet<IGameServices>(out var services))
+        config = value;
+        ApplyLabel();
+    }
+
+    void ApplyLabel()
+    {
+        var text = config ? config.Title : string.Empty;
+        if (label)
+            label.text = text;
+        if (legacyLabel)
+            legacyLabel.text = text;
+    }
+
+    void HandleClick()
+    {
+        if (config == null)
+            return;
+
+        if (!ServiceLocator.TryGet(out IGameServices services))
             return;
         var spawner = services.CharacterSpawner;
-        if (spawner == null || characterConfig == null)
+        if (spawner == null)
             return;
-        spawner.Spawn(characterConfig);
+
+        spawner.Spawn(config.CharacterConfig);
     }
 }
