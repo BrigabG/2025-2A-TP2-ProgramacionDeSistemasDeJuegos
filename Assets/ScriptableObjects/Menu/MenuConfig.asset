@@ -10,9 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 397a0a90889d5cf4ca97e1c1cf630182, type: 3}
-  m_Name: MenuConfigTest
+  m_Name: MenuConfig
   m_EditorClassIdentifier: 
   <SpawnerModel>k__BackingField: {fileID: 11400000, guid: e785e6bb6aa10924cae00a075c1b5cd6, type: 2}
   <ButtonPrefab>k__BackingField: {fileID: 5494813735892577113, guid: 2f2db00048fd04f49a1752fb7f69027b, type: 3}
   <Buttons>k__BackingField:
   - {fileID: 11400000, guid: e391f0705badd9a4c94177b3ffc16efd, type: 2}
+  - {fileID: 11400000, guid: 78b32c77a7c1d894a8ca6bd2e37cd846, type: 2}
+  - {fileID: 11400000, guid: 1a07296a5dd8c0c438b1a86f769a4255, type: 2}
+  - {fileID: 11400000, guid: dec9c98690e9f1d459a7d94628616761, type: 2}

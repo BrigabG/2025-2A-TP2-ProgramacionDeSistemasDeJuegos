@@ -1,8 +1,8 @@
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using DebugConsole.Core;
-using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace UI.DebugConsole
 {
@@ -22,7 +22,7 @@ namespace UI.DebugConsole
         private void Awake()
         {
             inputActions = new InputSystem_Actions();
-
+            
             inputActions.DebugConsole.ToggleConsole.performed += _ =>
             {
                 panel.SetActive(!panel.activeSelf);
@@ -33,7 +33,7 @@ namespace UI.DebugConsole
             {
                 HandleSubmitClick();
             };
-            
+
             if (openCloseButton != null)
                 openCloseButton.onClick.AddListener(ToggleConsole);
             

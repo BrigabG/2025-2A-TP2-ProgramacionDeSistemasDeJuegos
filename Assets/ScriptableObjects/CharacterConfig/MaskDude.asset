@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8eab1ede4e586884bb2b2e5610bf5d51, type: 3}
-  m_Name: CH1
+  m_Name: MaskDude
   m_EditorClassIdentifier: 
   <Prefab>k__BackingField: {fileID: 3659010567693264050, guid: b5bfe69065726de4fb7277dbb1fcec73, type: 3}
   <CharacterModel>k__BackingField:
@@ -21,4 +21,4 @@ MonoBehaviour:
     <MoveInput>k__BackingField: {fileID: -1680190386980627800, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     <JumpInput>k__BackingField: {fileID: -2099379676528639254, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
     <AirborneSpeedMultiplier>k__BackingField: 0.5
-  <AnimatorController>k__BackingField: {fileID: 9100000, guid: 19f65072c331a954aaa1eca245305edd, type: 2}
+  <AnimatorController>k__BackingField: {fileID: 22100000, guid: c4a988b63c6d7fe47bb9e78e4874b8e6, type: 2}

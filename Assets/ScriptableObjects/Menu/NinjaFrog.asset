@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc0acc3c5fe44f4eba46ce03f9c0c6a, type: 3}
-  m_Name: TestSpawn
+  m_Script: {fileID: 11500000, guid: bee60edb90fba2f42afe28e3bdfa602c, type: 3}
+  m_Name: NinjaFrog
   m_EditorClassIdentifier: 
-  spawnPoints:
-  - localPosition: {x: 0, y: 0, z: 0}
-    localEulerRotation: {x: 0, y: 0, z: 0}
-  useRandomOrder: 1
-  randomizeYaw: 1
-  randomYawRange: {x: 0, y: 360}
+  <Title>k__BackingField: Ninja Frog
+  <CharacterConfig>k__BackingField: {fileID: 11400000, guid: b3d1dfb82ebcaf4449b6a6c18af31485, type: 2}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bee60edb90fba2f42afe28e3bdfa602c, type: 3}
-  m_Name: SpawnButtonTry
+  m_Name: VirtualGuy
   m_EditorClassIdentifier: 
-  <Title>k__BackingField: Celeste
-  <CharacterConfig>k__BackingField: {fileID: 11400000, guid: 70048022e216a9e46845f03d95594907, type: 2}
+  <Title>k__BackingField: Virtual Guy
+  <CharacterConfig>k__BackingField: {fileID: 11400000, guid: 79b448bc39a61f24e9845feb7a7fb232, type: 2}
