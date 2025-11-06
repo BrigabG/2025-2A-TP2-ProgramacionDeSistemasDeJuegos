@@ -11,7 +11,7 @@ namespace DebugConsole.Core
     [CreateAssetMenu(menuName = "Debug/ConsoleWrapper")]
     public class ConsoleWrapper : ScriptableObject, IDebugConsole<string>, ILogHandler
     {
-        [SerializeField] protected char[] separators = new[] { ' ', '\t' };
+    protected char[] separators = new[] { ' ', '\t' };
         [SerializeField] private AnimationCommandConfig[] animationConfigs;
 
 

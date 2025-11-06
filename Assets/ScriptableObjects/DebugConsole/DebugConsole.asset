@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2af10a5d0b77134ab18ce82e93cdd1f, type: 3}
   m_Name: DebugConsole
   m_EditorClassIdentifier: 
-  commands: []
-  separators: 2000
   animationConfigs:
   - {fileID: 11400000, guid: d14e0eca79704e2478ff1fa91086cacf, type: 2}
   - {fileID: 11400000, guid: 1fbcef123531f7f41bcbec7b7cf29e58, type: 2}
