@@ -1,16 +1,22 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpawnButtonFactory : ISpawnButtonFactory
+public class SpawnButtonFactory : IButtonFactory
 {
-    public Button Create(SpawnButtonConfig config, Button prefab, Transform parent)
+    public bool CanHandle(ButtonConfig config)
+        => config is SpawnButtonConfig;
+
+    public Button Create(ButtonConfig config, Button prefab, Transform parent)
     {
-        if (!config || !prefab || !parent)
+        if (config is not SpawnButtonConfig spawnConfig)
+            return null;
+        if (!prefab || parent == null)
             return null;
 
         var instance = Object.Instantiate(prefab, parent);
         if (instance.TryGetComponent(out ISetup<SpawnButtonConfig> setup))
-            setup.Setup(config);
+            setup.Setup(spawnConfig);
         return instance;
     }
 }
+

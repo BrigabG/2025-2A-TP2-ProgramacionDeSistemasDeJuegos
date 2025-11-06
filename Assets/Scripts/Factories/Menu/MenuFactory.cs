@@ -9,7 +9,7 @@ public class MenuFactory : MonoBehaviour, ISetup<SpawnMenuConfig>
 
     readonly List<Button> spawnedButtons = new List<Button>();
 
-void Start()
+    void Start()
     {
         if (config)
             Setup(config);
@@ -32,13 +32,16 @@ void Start()
         if (!config || !container)
             return;
 
-        if (!ServiceLocator.TryGet(out ISpawnButtonFactory buttonFactory))
+        if (!ServiceLocator.TryGet(out IButtonAbstractFactory buttonFactory))
             return;
         if (!ServiceLocator.TryGet(out IGameServices services) || services.CharacterSpawner == null)
             return;
 
         if (config.SpawnerModel)
             services.CharacterSpawner.Setup(config.SpawnerModel);
+
+        if (!config.ButtonPrefab)
+            return;
 
         var entries = config.Buttons;
         if (entries == null)
@@ -64,3 +67,4 @@ void Start()
         spawnedButtons.Clear();
     }
 }
+

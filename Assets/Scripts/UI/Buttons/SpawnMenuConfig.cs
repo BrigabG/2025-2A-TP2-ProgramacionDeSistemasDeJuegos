@@ -6,5 +6,5 @@ public class SpawnMenuConfig : ScriptableObject
 {
     [field: SerializeField] public CharacterSpawnerModel SpawnerModel { get; private set; }
     [field: SerializeField] public Button ButtonPrefab { get; private set; }
-    [field: SerializeField] public SpawnButtonConfig[] Buttons { get; private set; }
+    [field: SerializeField] public ButtonConfig[] Buttons { get; private set; }
 }

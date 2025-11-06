@@ -15,6 +15,10 @@ MonoBehaviour:
   spawnPoints:
   - localPosition: {x: 0, y: 0, z: 0}
     localEulerRotation: {x: 0, y: 0, z: 0}
+  - localPosition: {x: 5, y: 5, z: 0}
+    localEulerRotation: {x: 0, y: 0, z: 0}
+  - localPosition: {x: -5, y: -5, z: 0}
+    localEulerRotation: {x: 0, y: 0, z: 0}
   useRandomOrder: 0
   randomizeYaw: 0
   randomYawRange: {x: 0, y: 0}

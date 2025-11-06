@@ -5,7 +5,8 @@ public class Startup : MonoBehaviour
     GameServices services;
     ICharacterFactory characterFactory;
     ICharacterAbstractFactory characterAbstractFactory;
-    ISpawnButtonFactory buttonFactory;
+    IButtonAbstractFactory buttonFactory;
+    SpawnButtonFactory spawnButtonFactory;
 
     void Awake()
     {
@@ -29,19 +30,23 @@ public class Startup : MonoBehaviour
         ServiceLocator.Register<ICharacterFactory>(characterFactory);
         ServiceLocator.Register<ICharacterAbstractFactory>(characterAbstractFactory);
 
-        buttonFactory = new SpawnButtonFactory();
-        ServiceLocator.Register<ISpawnButtonFactory>(buttonFactory);
+        buttonFactory = new ButtonAbstractFactory();
+        spawnButtonFactory = new SpawnButtonFactory();
+        buttonFactory.RegisterFactory<SpawnButtonConfig>(spawnButtonFactory);
+        ServiceLocator.Register<IButtonAbstractFactory>(buttonFactory);
     }
 
     void UnregisterServices()
     {
         ServiceLocator.Unregister<ICharacterAbstractFactory>();
         ServiceLocator.Unregister<ICharacterFactory>();
-        ServiceLocator.Unregister<ISpawnButtonFactory>();
+        ServiceLocator.Unregister<IButtonAbstractFactory>();
         ServiceLocator.Unregister<IGameServices>();
         services = null;
         characterFactory = null;
         characterAbstractFactory = null;
+        spawnButtonFactory = null;
         buttonFactory = null;
     }
 }
+
